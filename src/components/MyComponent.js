@@ -4,8 +4,17 @@ import React from "react";
 // sau 16.8 se dung function component
 
 class MyComponent extends React.Component {
+  state = {
+    name: "TanNQ",
+    address: "Ha Tinh",
+    age: 23,
+  };
   render() {
-    return <div>My Component -{Math.random()}</div>;
+    return (
+      <div>
+        My name is {this.state.name} and I'm from {this.state.address}
+      </div>
+    );
   }
 }
 export default MyComponent;
