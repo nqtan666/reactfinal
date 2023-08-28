@@ -5,27 +5,34 @@ import React from "react";
 
 class MyComponent extends React.Component {
   state = {
-    name: "TanNQ",
-    address: "Ha Tinh",
-    age: 23,
+    name: "",
+    age: "",
   };
-  handleClick = () => {
+  handleOnChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
     this.setState({
-      name: "AAAA",
-      age: Math.floor(Math.random() * 100),
+      [name]: value,
     });
   };
-  handleOnMoverOver(event) {
-    console.log(event.screenX);
-  }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(">>>check state", this.state);
+  };
   render() {
-    console.log(">>>>check state :", this.state);
     return (
       <div>
-        My name is {this.state.name} and I'm from {this.state.address} age :{" "}
+        My name is {this.state.name} and I'm {this.state.age}
         {this.state.age}
-        <button onClick={() => this.handleClick()}>Click Me</button>
-        <button onMouseOver={(e) => this.handleOnMoverOver(e)}>HoverMe</button>
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+          <input
+            onChange={(e) => this.handleOnChange(e)}
+            value={this.state.name}
+            name="name"
+            type="text"
+          />
+          <button>Submit</button>
+        </form>
       </div>
     );
   }
