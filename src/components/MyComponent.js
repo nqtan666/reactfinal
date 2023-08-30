@@ -5,16 +5,20 @@ import DisplayInfo from "./DisplayInfor";
 // sau 16.8 se dung function component
 
 class MyComponent extends React.Component {
+  state = {
+    listUser: [
+      { id: 1, name: "TanNQ", age: 30 },
+      { id: 2, name: "Eric", age: 30 },
+      { id: 3, name: "Quoc Tan ", age: 30 },
+    ],
+  };
   render() {
-    let myInfo = ["ab", "c", "c"];
     return (
       <>
         <UserInfo />
         <br />
         <br />
-        <DisplayInfo name="TanNQ" age="30" />
-        <hr />
-        <DisplayInfo name="TanNQ" age={26} myInfo={myInfo} />
+        <DisplayInfo listUser={this.state.listUser} />
       </>
     );
   }
