@@ -1,4 +1,5 @@
 import React from "react";
+import "./DisplayInfor.scss";
 class DisplayInfo extends React.Component {
   state = {
     isShow: true,
@@ -11,7 +12,7 @@ class DisplayInfo extends React.Component {
   render() {
     const { listUser } = this.props;
     return (
-      <>
+      <div className="display-infor-container">
         {this.state.isShow && (
           <div>
             {listUser &&
@@ -20,7 +21,7 @@ class DisplayInfo extends React.Component {
                 return (
                   <div
                     key={item.id}
-                    className={item.age > 18 ? "red" : "green"}
+                    className={item.age > 18 ? "green" : "red"}
                   >
                     <div> I'm - {item.name}</div>
                     <div> My age - {item.age}</div>
@@ -30,10 +31,12 @@ class DisplayInfo extends React.Component {
               })}
           </div>
         )}
-        <button onClick={() => this.handleShowHide()}>
-          {this.state.isShow ? "Hide" : "Show"}
-        </button>
-      </>
+        <div>
+          <button onClick={() => this.handleShowHide()}>
+            {this.state.isShow ? "Hide" : "Show"}
+          </button>
+        </div>
+      </div>
     );
   }
 }

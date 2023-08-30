@@ -1,5 +1,5 @@
 import React from "react";
-class UserInfo extends React.Component {
+class AddUserInfor extends React.Component {
   state = {
     name: "",
     age: "",
@@ -14,9 +14,10 @@ class UserInfo extends React.Component {
   };
   handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(">>>check state", this.state);
+    this.props.handleAddUser(this.state);
   };
   render() {
+    console.log(">>>>check props", this.props);
     return (
       <>
         <div>
@@ -40,8 +41,8 @@ class UserInfo extends React.Component {
           />
           <button>Submit</button>
         </form>
-      </    >
+      </>
     );
   }
 }
-export default UserInfo;
+export default AddUserInfor;

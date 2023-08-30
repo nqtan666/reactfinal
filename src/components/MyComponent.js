@@ -1,5 +1,5 @@
 import React from "react";
-import UserInfo from "./UserInfo";
+import AddUserInfor from "./AddUserInfor";
 import DisplayInfo from "./DisplayInfor";
 // truoc 16.8 se dung class component
 // sau 16.8 se dung function component
@@ -12,10 +12,16 @@ class MyComponent extends React.Component {
       { id: 3, name: "Quoc Tan ", age: 30 },
     ],
   };
+  handleAddUser = (data) => {
+    this.setState({
+      listUser: [...this.state.listUser, data],
+    });
+  };
   render() {
+    console.log("check state", this.state.listUser);
     return (
       <>
-        <UserInfo />
+        <AddUserInfor handleAddUser={this.handleAddUser} />
         <br />
         <br />
         <DisplayInfo listUser={this.state.listUser} />
