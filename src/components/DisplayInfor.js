@@ -1,5 +1,6 @@
 import React from "react";
 import "./DisplayInfor.scss";
+import logo from "./../logo.svg";
 class DisplayInfo extends React.Component {
   state = {
     isShow: true,
@@ -9,6 +10,9 @@ class DisplayInfo extends React.Component {
       isShow: !this.state.isShow,
     });
   };
+  handleDelete = (id) => {
+    this.props.handleDeleteUser(id);
+  };
   render() {
     const { listUser } = this.props;
     return (
@@ -16,7 +20,6 @@ class DisplayInfo extends React.Component {
         {this.state.isShow && (
           <div>
             {listUser &&
-              listUser.length &&
               listUser.map((item) => {
                 return (
                   <div
@@ -25,6 +28,9 @@ class DisplayInfo extends React.Component {
                   >
                     <div> I'm - {item.name}</div>
                     <div> My age - {item.age}</div>
+                    <button onClick={() => this.handleDelete(item.id)}>
+                      delete
+                    </button>
                     <hr />
                   </div>
                 );
