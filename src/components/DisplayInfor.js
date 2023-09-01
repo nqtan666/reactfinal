@@ -1,68 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DisplayInfor.scss";
 import logo from "./../logo.svg";
-class DisplayInfo extends React.Component {
-  constructor(props) {
-    console.log("call contructor 1");
-    super(props);
-    this.state = {
-      isShow: true,
-    };
-  }
-  handleShowHide = () => {
-    this.setState({
-      isShow: !this.state.isShow,
-    });
+// class DisplayInfo extends React.Component {
+//   render() {
+//     const { listUser } = this.props;
+//     return (
+//       <div className="display-infor-container">
+//         {true && (
+//           <div>
+//             {listUser &&
+//               listUser.map((item) => {
+//                 return (
+//                   <div
+//                     key={item.id}
+//                     className={item.age > 18 ? "green" : "red"}
+//                   >
+//                     <div> I'm - {item.name}</div>
+//                     <div> My age - {item.age}</div>
+//                     <button onClick={() => this.handleDelete(item.id)}>
+//                       delete
+//                     </button>
+//                     <hr />
+//                   </div>
+//                 );
+//               })}
+//           </div>
+//         )}
+//       </div>
+//     );
+//   }
+// }
+const DisplayInfo = (props) => {
+  const [isShowHideListUser, setShowHideListUser] = useState(true);
+  const { listUser } = props;
+  const handleDelete = (id) => {
+    props.handleDeleteUser(id);
   };
-  handleDelete = (id) => {
-    this.props.handleDeleteUser(id);
+  const handleShowHide = () => {
+    setShowHideListUser(!isShowHideListUser);
   };
-  componentDidMount() {
-    console.log(">>>>>call me componenDidmout");
-    setTimeout(() => {
-      document.title = "TanNQ";
-    }, 3000);
-  }
-  componentDidUpdate(prevProps, prevState) {
-    console.log(">>>check component DidUpdate", this.props, prevProps);
-    if (this.props.listUser !== prevProps.listUser) {
-      if (this.props.listUser.length === 5) {
-        alert("You got 5 user");
-      }
-    }
-  }
-  render() {
-    const { listUser } = this.props;
-    console.log("call render 2");
-    return (
-      <div className="display-infor-container">
-        {this.state.isShow && (
-          <div>
-            {listUser &&
-              listUser.map((item) => {
-                return (
-                  <div
-                    key={item.id}
-                    className={item.age > 18 ? "green" : "red"}
-                  >
-                    <div> I'm - {item.name}</div>
-                    <div> My age - {item.age}</div>
-                    <button onClick={() => this.handleDelete(item.id)}>
-                      delete
-                    </button>
-                    <hr />
-                  </div>
-                );
-              })}
-          </div>
-        )}
+  return (
+    <div className="display-infor-container">
+      {isShowHideListUser && (
         <div>
-          <button onClick={() => this.handleShowHide()}>
-            {this.state.isShow ? "Hide" : "Show"}
-          </button>
+          {listUser &&
+            listUser.map((item) => {
+              return (
+                <div key={item.id} className={item.age > 18 ? "green" : "red"}>
+                  <div> I'm - {item.name}</div>
+                  <div> My age - {item.age}</div>
+                  <button onClick={() => handleDelete(item.id)}>delete</button>
+                  <hr />
+                </div>
+              );
+            })}
         </div>
+      )}
+      <div>
+        <button onClick={() => handleShowHide()}>
+          {isShowHideListUser ? "Hide" : "Show"}
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 export default DisplayInfo;
