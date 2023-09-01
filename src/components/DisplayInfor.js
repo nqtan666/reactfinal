@@ -2,9 +2,13 @@ import React from "react";
 import "./DisplayInfor.scss";
 import logo from "./../logo.svg";
 class DisplayInfo extends React.Component {
-  state = {
-    isShow: true,
-  };
+  constructor(props) {
+    console.log("call contructor 1");
+    super(props);
+    this.state = {
+      isShow: true,
+    };
+  }
   handleShowHide = () => {
     this.setState({
       isShow: !this.state.isShow,
@@ -13,8 +17,23 @@ class DisplayInfo extends React.Component {
   handleDelete = (id) => {
     this.props.handleDeleteUser(id);
   };
+  componentDidMount() {
+    console.log(">>>>>call me componenDidmout");
+    setTimeout(() => {
+      document.title = "TanNQ";
+    }, 3000);
+  }
+  componentDidUpdate(prevProps, prevState) {
+    console.log(">>>check component DidUpdate", this.props, prevProps);
+    if (this.props.listUser !== prevProps.listUser) {
+      if (this.props.listUser.length === 5) {
+        alert("You got 5 user");
+      }
+    }
+  }
   render() {
     const { listUser } = this.props;
+    console.log("call render 2");
     return (
       <div className="display-infor-container">
         {this.state.isShow && (

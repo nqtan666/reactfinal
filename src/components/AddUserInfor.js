@@ -17,7 +17,6 @@ class AddUserInfor extends React.Component {
     this.props.handleAddUser(this.state);
   };
   render() {
-    console.log(">>>>check props", this.props);
     return (
       <>
         <div>

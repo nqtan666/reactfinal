@@ -24,7 +24,6 @@ class MyComponent extends React.Component {
     });
   };
   render() {
-    console.log("check state", this.state.listUser);
     return (
       <>
         <AddUserInfor handleAddUser={this.handleAddUser} />
