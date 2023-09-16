@@ -9,3 +9,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.app-container {
+  .header-container {
+      .navbar {
+        z-index: 5;
+        opacity: 0.6;
+        font-weight: 500;
+        .navbar-nav{
+          .nav-link {
+            color: black;
+            &.active{
+              color: rgb(255, 170, 0);
+            }
+          }
+        }
+      }
+  }
+}
+
+video {
+  position: fixed;
+  bottom: 0;
+
+  width: 100vw;
+}
