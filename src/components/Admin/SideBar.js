@@ -11,12 +11,14 @@ import {
 import {
   FaTachometerAlt,
   FaGem,
+  FaRegCopyright,
   FaList,
   FaGithub,
   FaRegLaughWink,
   FaHeart,
 } from "react-icons/fa";
 import sidebarBg from "../../assets/bg_sidebar.jpg";
+import logo from "../../assets/logo192.png";
 const SideBar = (props) => {
   const { image, collapsed, toggled, handleToggleSidebar } = props;
   return (
@@ -41,6 +43,7 @@ const SideBar = (props) => {
               whiteSpace: "nowrap",
             }}
           >
+            <img className="img-logo" src={logo}></img>
             TanNQ
           </div>
         </SidebarHeader>
@@ -51,19 +54,14 @@ const SideBar = (props) => {
               icon={<FaTachometerAlt />}
               suffix={<span className="badge red">New</span>}
             >
-              dashboard
+              Dashboard
             </MenuItem>
-            <MenuItem icon={<FaGem />}> components </MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu
-              title="Category"
-              suffix={<span className="badge yellow">3</span>}
-              icon={<FaRegLaughWink />}
-            >
-              <MenuItem> 1 Test1</MenuItem>
-              <MenuItem> 2 Test2</MenuItem>
-              <MenuItem> 3 Test1</MenuItem>
+            <SubMenu title="Category" icon={<FaRegLaughWink />}>
+              <MenuItem> Quản Lý User</MenuItem>
+              <MenuItem> Quản Lý Bài Quiz</MenuItem>
+              <MenuItem> Quản Lý Câu Hỏi</MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>
@@ -75,23 +73,18 @@ const SideBar = (props) => {
               padding: "20px 24px",
             }}
           >
-            <a
-              href="https://www.google.com/"
-              target="_blank"
-              className="sidebar-btn"
-              rel="noopener noreferrer"
-            >
-              <FaGithub />
-              <span
-                style={{
-                  whiteSpace: "nowrap",
-                  textOverflow: "ellipsis",
-                  overflow: "hidden",
-                }}
-              >
-                viewSource
+            <button className="btn-footer-sidebar">
+              <span className="icon-footer-sidebar">
+                <FaRegCopyright />
               </span>
-            </a>
+              <a
+                style={{ whiteSpace: "nowrap" }}
+                href="https://www.google.com/"
+                className="link-footer-sidebar"
+              >
+                Hoc Cung Toi
+              </a>
+            </button>
           </div>
         </SidebarFooter>
       </ProSidebar>

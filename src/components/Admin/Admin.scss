@@ -3,6 +3,30 @@
     .admin-sidebar{
         .pro-sidebar{
             height: 100vh !important;
+            .pro-sidebar-header {
+                display: flex;
+                justify-content: center;
+                color: white;
+                .img-logo{
+                    width: 40px;
+                    margin-right: 10px;
+                }
+            }
+            .pro-sidebar-footer{
+                .btn-footer-sidebar{
+                    border-radius: 10px;
+                    height: 40px;
+                    padding: 0 20px;
+                    background-color: bisque;
+                    .icon-footer-sidebar {
+                        margin-right: 5px;
+                    }
+                    .link-footer-sidebar{
+                        text-decoration: none;
+                    }
+                }
+            }
         }
+        
     }
 }
