@@ -3,6 +3,7 @@ import "./Admin.scss";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 const Admin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   return (
@@ -18,6 +19,7 @@ const Admin = (props) => {
           <Outlet />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

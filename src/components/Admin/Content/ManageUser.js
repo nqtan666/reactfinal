@@ -17,7 +17,7 @@ const ManageUser = () => {
           </button>
         </div>
         <div className="table-users-container">table users</div>
-        <ModelCreateUser show={show} setShow = {setShow}/>
+        <ModelCreateUser show={show} setShow={setShow} />
       </div>
     </div>
   );
