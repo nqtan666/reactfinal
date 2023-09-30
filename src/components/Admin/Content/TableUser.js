@@ -3,7 +3,9 @@ const TableUser = (props) => {
   const handleClickBtnDel = (item) => {
     props.handleClickBtnDel(item);
   };
-  const handleShow = () => setShow(true);
+  const handleClickBtnView = (item) => {
+    props.handleClickBtnView(item);
+  };
   return (
     <>
       <table className="table table-hover">
@@ -26,7 +28,12 @@ const TableUser = (props) => {
                   <td>{item.email}</td>
                   <td>{item.role}</td>
                   <td>
-                    <button className="btn btn-secondary">View</button>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handleClickBtnView(item)}
+                    >
+                      View
+                    </button>
                     <button className="btn btn-warning mx-3">Update</button>
                     <button
                       className="btn btn-danger"

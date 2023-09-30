@@ -40,3 +40,21 @@
     }
     
 }
+.detail-user-container{
+    .user-detail-container{
+       display: flex;
+       .img-user-detail{
+        margin-right: 10px;
+        p{
+            text-align: center;
+        }
+        img{
+            width: 100px;
+             height: auto;
+          }
+       }
+       .content-user-detail{
+         width: 100%;
+       }
+    }
+}

@@ -64,9 +64,7 @@ function ModelCreateUser(props) {
   };
   return (
     <>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Add new user
-      </Button> */}
+
 
       <Modal
         show={show}

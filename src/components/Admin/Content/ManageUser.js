@@ -6,12 +6,15 @@ import TableUser from "./TableUser";
 import { getAllUsers } from "../../../service/apiServices";
 import ModelDeleteUser from "./ModelDeleteUser";
 import { toast } from "react-toastify";
+import ModelViewUser from "./ModelViewUser";
 
 const ManageUser = () => {
   const [showModelCreateUser, setShowModelCreateUser] = useState(false);
   const [showModelDelUser, setShowModelDelUser] = useState(false);
+  const [showModelViewUser, setShowModelViewUser] = useState(false);
+
   const [listUsers, setListUsers] = useState([]);
-  const [dataDelete, setDataDelete] = useState([]);
+  const [dataSelect, setDataSelect] = useState([]);
   useEffect(() => {
     fetchAllUser();
     console.log("run run");
@@ -23,11 +26,21 @@ const ManageUser = () => {
       setListUsers(data.DT);
     }
   };
-  const handleShow = () => setShowModelCreateUser(true);
+  const handleShowModelCreateUser = () => setShowModelCreateUser(true);
+
   const handleClickBtnDel = (data) => {
     if (data) {
       setShowModelDelUser(true);
-      setDataDelete(data);
+      setDataSelect(data);
+    } else {
+      toast.error("Not data user");
+    }
+  };
+
+  const handleClickBtnView = (data) => {
+    if (data) {
+      setShowModelViewUser(true);
+      setDataSelect(data);
     } else {
       toast.error("Not data user");
     }
@@ -37,7 +50,10 @@ const ManageUser = () => {
       <div className="title">ManageUser</div>
       <div className="users-content">
         <div className="btn-add-new">
-          <button className="btn btn-primary" onClick={() => handleShow()}>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleShowModelCreateUser()}
+          >
             <FcPlus />
             Add user
           </button>
@@ -46,6 +62,7 @@ const ManageUser = () => {
           <TableUser
             listUsers={listUsers}
             handleClickBtnDel={handleClickBtnDel}
+            handleClickBtnView={handleClickBtnView}
           />
         </div>
         <ModelCreateUser
@@ -56,8 +73,13 @@ const ManageUser = () => {
         <ModelDeleteUser
           show={showModelDelUser}
           setShow={setShowModelDelUser}
-          dataDelete={dataDelete}
+          dataDelete={dataSelect}
           fetchAllUser={fetchAllUser}
+        />
+        <ModelViewUser
+          show={showModelViewUser}
+          setShow={setShowModelViewUser}
+          dataViewUser={dataSelect}
         />
       </div>
     </div>
