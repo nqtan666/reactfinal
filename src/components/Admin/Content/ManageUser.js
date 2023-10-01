@@ -7,17 +7,19 @@ import { getAllUsers } from "../../../service/apiServices";
 import ModelDeleteUser from "./ModelDeleteUser";
 import { toast } from "react-toastify";
 import ModelViewUser from "./ModelViewUser";
+import ModelUpdateUser from "./ModelUpdateUser";
 
 const ManageUser = () => {
   const [showModelCreateUser, setShowModelCreateUser] = useState(false);
   const [showModelDelUser, setShowModelDelUser] = useState(false);
   const [showModelViewUser, setShowModelViewUser] = useState(false);
+  const [showModelUpdateUser, setShowModelUpdateUser] = useState(false);
 
   const [listUsers, setListUsers] = useState([]);
   const [dataSelect, setDataSelect] = useState([]);
+  const [dataUpdate, setDataUpdate] = useState([]);
   useEffect(() => {
     fetchAllUser();
-    console.log("run run");
   }, []);
 
   const fetchAllUser = async () => {
@@ -45,6 +47,14 @@ const ManageUser = () => {
       toast.error("Not data user");
     }
   };
+  const handleClickBtnUpdate = (data) => {
+    if (data) {
+      setShowModelUpdateUser(true);
+      setDataUpdate(data);
+    } else {
+      toast.error("Not data user");
+    }
+  };
   return (
     <div className="manage-user-container">
       <div className="title">ManageUser</div>
@@ -63,12 +73,19 @@ const ManageUser = () => {
             listUsers={listUsers}
             handleClickBtnDel={handleClickBtnDel}
             handleClickBtnView={handleClickBtnView}
+            handleClickBtnUpdate={handleClickBtnUpdate}
           />
         </div>
         <ModelCreateUser
           show={showModelCreateUser}
           setShow={setShowModelCreateUser}
           fetchAllUser={fetchAllUser}
+        />
+        <ModelUpdateUser
+          show={showModelUpdateUser}
+          setShow={setShowModelUpdateUser}
+          fetchAllUser={fetchAllUser}
+          dataUpdate={dataUpdate}
         />
         <ModelDeleteUser
           show={showModelDelUser}

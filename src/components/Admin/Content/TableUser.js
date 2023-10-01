@@ -6,6 +6,9 @@ const TableUser = (props) => {
   const handleClickBtnView = (item) => {
     props.handleClickBtnView(item);
   };
+  const handleClickBtnUpdate = (item) => {
+    props.handleClickBtnUpdate(item);
+  };
   return (
     <>
       <table className="table table-hover">
@@ -34,7 +37,12 @@ const TableUser = (props) => {
                     >
                       View
                     </button>
-                    <button className="btn btn-warning mx-3">Update</button>
+                    <button
+                      className="btn btn-warning mx-3"
+                      onClick={() => handleClickBtnUpdate(item)}
+                    >
+                      Update
+                    </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => handleClickBtnDel(item)}

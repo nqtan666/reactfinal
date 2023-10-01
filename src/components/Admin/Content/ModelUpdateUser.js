@@ -5,18 +5,15 @@ import Modal from "react-bootstrap/Modal";
 import { FaArrowCircleUp } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { postCreateNewUser } from "../../../service/apiServices";
-function ModelCreateUser(props) {
-  const { show, setShow } = props;
+import { updatCreateNewUser } from "../../../service/apiServices";
+import { useEffect } from "react";
+import _ from "lodash";
+function ModelUpdateUser(props) {
+  const { show, setShow, dataUpdate } = props;
   const handleClose = () => {
     setShow(false);
-    setEmail("");
-    setPassword("");
-    setUserName("");
-    setRole("");
-    setImage("");
-    setPreviewImage("");
   };
+  // const handleShow = () => setShow(true);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,34 +22,24 @@ function ModelCreateUser(props) {
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
 
+  useEffect(() => {
+    if (!_.isEmpty(dataUpdate)) {
+      setEmail(dataUpdate.email);
+      setUserName(dataUpdate.username);
+      setRole(dataUpdate.role);
+      setImage();
+      setPreviewImage(`data:image/png;base64,${dataUpdate.image}`);
+    }
+  }, [dataUpdate]);
   const handelUploadImage = (e) => {
+    console.log("1111111111");
     if (e.target && e.target.files && e.target.files["0"]) {
       setImage(e.target.files["0"]);
       setPreviewImage(URL.createObjectURL(e.target.files["0"]));
     }
   };
-  function validateEmail(email) {
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-    if (reg.test(email) == false) {
-      return false;
-    }
-
-    return true;
-  }
-  const handlSubmitCreateUser = async () => {
-    // validate
-    const isValidEmail = validateEmail(email);
-    if (!isValidEmail) {
-      // alert("mail fail");
-      toast.error("Invalid email");
-      return;
-    }
-    if (!password) {
-      toast.error("Invalid password");
-      return;
-    }
-    let data = await postCreateNewUser(email, password, username, role, image);
+  const handlSubmitUpdateUser = async () => {
+    let data = await updatCreateNewUser(dataUpdate.id, username, role, image);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       await props.fetchAllUser();
@@ -71,7 +58,7 @@ function ModelCreateUser(props) {
         className="modal-add-user"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add new user</Modal.Title>
+          <Modal.Title>Update user</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="row g-3">
@@ -82,6 +69,7 @@ function ModelCreateUser(props) {
                 className="form-control"
                 placeholder="Email"
                 value={email}
+                disabled
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -92,6 +80,7 @@ function ModelCreateUser(props) {
                 className="form-control"
                 placeholder="Password"
                 value={password}
+                disabled
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -139,7 +128,7 @@ function ModelCreateUser(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handlSubmitCreateUser()}>
+          <Button variant="primary" onClick={() => handlSubmitUpdateUser()}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -147,4 +136,4 @@ function ModelCreateUser(props) {
     </>
   );
 }
-export default ModelCreateUser;
+export default ModelUpdateUser;
