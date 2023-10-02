@@ -2,7 +2,6 @@ import ReactPaginate from "react-paginate";
 import { useState } from "react";
 const PaginatedItems = (props) => {
   const handlePageClick = (e) => {
-    console.log(`User requested page number ${e.selected}, which is offset`);
     props.fetchAllUserWithPaginate(+e.selected + 1);
     props.setPage(+e.selected + 1);
   };
@@ -27,6 +26,7 @@ const PaginatedItems = (props) => {
         containerClassName="pagination"
         activeClassName="active"
         renderOnZeroPageCount={null}
+        forcePage={props.page - 1}
       />
     </>
   );

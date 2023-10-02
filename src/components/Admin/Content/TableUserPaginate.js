@@ -66,7 +66,7 @@ const TableUserPaginate = (props) => {
       <div className="user-pagination d-flex justify-content-center">
         <PaginatedItems
           pageCount={totalPage}
-          itemsPerPage={4}
+          page={page}
           setPage={setPage}
           fetchAllUserWithPaginate={props.fetchAllUserWithPaginate}
         />

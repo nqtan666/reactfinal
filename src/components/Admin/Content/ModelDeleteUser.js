@@ -4,14 +4,15 @@ import { deleteUser } from "../../../service/apiServices";
 import { toast } from "react-toastify";
 
 function ModelDeleteUser(props) {
-  const { show, setShow, dataDelete, page } = props;
+  const { show, setShow, dataDelete, setPage } = props;
   const handleClose = () => setShow(false);
   const handleSubmitDeleteUser = async () => {
     let data = await deleteUser(dataDelete.id);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
-      await props.fetchAllUserWithPaginate(page);
+      setPage(1);
+      await props.fetchAllUserWithPaginate(1);
     }
     if (data && data.EC != 0) {
       toast.error(data.EM);

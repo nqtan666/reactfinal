@@ -11,7 +11,7 @@ import ModelUpdateUser from "./ModelUpdateUser";
 import TableUserPaginate from "./TableUserPaginate";
 
 const ManageUser = () => {
-  const LIMIT_USER = 6;
+  const LIMIT_USER = 1;
   const [showModelCreateUser, setShowModelCreateUser] = useState(false);
   const [showModelDelUser, setShowModelDelUser] = useState(false);
   const [showModelViewUser, setShowModelViewUser] = useState(false);
@@ -86,13 +86,14 @@ const ManageUser = () => {
             listUsers={listUsers}
             handleClickBtnDel={handleClickBtnDel}
             handleClickBtnView={handleClickBtnView}
-            handleClickBtnUpdate={handleClickBtnUpdate}
+            handleClickBtnUpdate={handleClickBtnUpdate} 
           /> */}
           <TableUserPaginate
             listUsers={listUsers}
             handleClickBtnDel={handleClickBtnDel}
             handleClickBtnView={handleClickBtnView}
             handleClickBtnUpdate={handleClickBtnUpdate}
+            page={page}
             setPage={setPage}
             totalPage={totalPage}
             fetchAllUserWithPaginate={fetchAllUserWithPaginate}
@@ -118,8 +119,8 @@ const ManageUser = () => {
           setShow={setShowModelDelUser}
           dataDelete={dataSelect}
           fetchAllUser={fetchAllUser}
-          page={page}
           fetchAllUserWithPaginate={fetchAllUserWithPaginate}
+          setPage={setPage}
         />
         <ModelViewUser
           show={showModelViewUser}
