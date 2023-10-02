@@ -19,7 +19,7 @@ function ModelViewUser(props) {
           <div className="user-detail-container">
             <div className="img-user-detail">
               <p>Avatar</p>
-              <img src="https://th.bing.com/th/id/R.47cecf6ce91d73af7900067efeaacb63?rik=%2btKMy%2fBRVLblKA&pid=ImgRaw&r=0"></img>
+              <img src={`data:image/png;base64,${dataViewUser.image}`}></img>
             </div>
             <div className="content-user-detail">
               <div>

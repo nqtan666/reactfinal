@@ -1,15 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaArrowCircleUp } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updatCreateNewUser } from "../../../service/apiServices";
-import { useEffect } from "react";
 import _ from "lodash";
 function ModelUpdateUser(props) {
-  const { show, setShow, dataUpdate } = props;
+  const { show, setShow, dataUpdate, page } = props;
   const handleClose = () => {
     setShow(false);
   };
@@ -32,7 +31,6 @@ function ModelUpdateUser(props) {
     }
   }, [dataUpdate]);
   const handelUploadImage = (e) => {
-    console.log("1111111111");
     if (e.target && e.target.files && e.target.files["0"]) {
       setImage(e.target.files["0"]);
       setPreviewImage(URL.createObjectURL(e.target.files["0"]));
@@ -42,7 +40,8 @@ function ModelUpdateUser(props) {
     let data = await updatCreateNewUser(dataUpdate.id, username, role, image);
     if (data && data.EC === 0) {
       toast.success(data.EM);
-      await props.fetchAllUser();
+      await props.fetchAllUserWithPaginate(page);
+
       handleClose();
     } else {
       toast.error(data.EM);

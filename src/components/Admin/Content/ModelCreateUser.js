@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { postCreateNewUser } from "../../../service/apiServices";
 function ModelCreateUser(props) {
-  const { show, setShow } = props;
+  const { show, setShow, page } = props;
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -55,7 +55,7 @@ function ModelCreateUser(props) {
     let data = await postCreateNewUser(email, password, username, role, image);
     if (data && data.EC === 0) {
       toast.success(data.EM);
-      await props.fetchAllUser();
+      await props.fetchAllUserWithPaginate(page);
       handleClose();
     } else {
       toast.error(data.EM);
