@@ -3,7 +3,7 @@ import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../../service/apiServices";
 import { toast } from "react-toastify";
-const Login = () => { 
+const Login = () => {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

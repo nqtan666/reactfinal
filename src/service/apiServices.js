@@ -34,6 +34,9 @@ const postLogin = (email, password) => {
     password,
   });
 };
+const postRegister = (email, username, password) => {
+  return axiosCustomize.post("api/v1/register", { email, username, password });
+};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -41,4 +44,5 @@ export {
   updatCreateNewUser,
   getUserWithPaginate,
   postLogin,
+  postRegister,
 };
