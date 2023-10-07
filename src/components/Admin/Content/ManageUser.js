@@ -11,7 +11,7 @@ import ModelUpdateUser from "./ModelUpdateUser";
 import TableUserPaginate from "./TableUserPaginate";
 
 const ManageUser = () => {
-  const LIMIT_USER = 1;
+  const LIMIT_USER = 6;
   const [showModelCreateUser, setShowModelCreateUser] = useState(false);
   const [showModelDelUser, setShowModelDelUser] = useState(false);
   const [showModelViewUser, setShowModelViewUser] = useState(false);
