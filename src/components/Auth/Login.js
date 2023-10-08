@@ -21,7 +21,7 @@ const Login = () => {
       dispatch(doLogin(res));
       toast.success(res.EM);
       setIsLoading(false);
-      // navigate("/");
+      navigate("/");
     } else {
       toast.error(res.EM);
       setIsLoading(false);
