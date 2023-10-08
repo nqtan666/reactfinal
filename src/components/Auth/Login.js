@@ -5,20 +5,26 @@ import { postLogin } from "../../service/apiServices";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
+import { FaSpinner } from "react-icons/fa";
+import { set } from "lodash";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const handleLogin = async () => {
+    setIsLoading(true);
     // validate
     let res = await postLogin(email, password);
     if (res && res.EC === 0) {
       dispatch(doLogin(res));
       toast.success(res.EM);
-      navigate("/");
+      setIsLoading(false);
+      // navigate("/");
     } else {
       toast.error(res.EM);
+      setIsLoading(false);
     }
   };
   const handleGotoHome = () => {
@@ -65,8 +71,14 @@ const Login = () => {
           </div>
           <span className="forgot-password">Forgot password?</span>
           <div>
-            <button onClick={() => handleLogin()} className="btn-submit ">
-              Login
+            <button
+              onClick={() => handleLogin()}
+              className="btn-submit"
+              disabled={isLoading}
+            >
+              {isLoading && <FaSpinner className="loaderIcon" />}
+
+              <span>Login</span>
             </button>
           </div>
           <div className="goto-home" onClick={() => handleGotoHome()}>
