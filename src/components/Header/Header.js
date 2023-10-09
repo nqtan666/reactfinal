@@ -50,8 +50,8 @@ const Header = () => {
               </>
             ) : (
               <NavDropdown title="Setting" id="basic-nav-dropdown">
-                <NavDropdown.Item to="#action/3.1">Logout</NavDropdown.Item>
                 <NavDropdown.Item to="#action/3.1">Profile</NavDropdown.Item>
+                <NavDropdown.Item to="#action/3.1">Logout</NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>
