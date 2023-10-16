@@ -19,8 +19,9 @@ import {
 } from "react-icons/fa";
 import sidebarBg from "../../assets/bg_sidebar.jpg";
 import logo from "../../assets/logo192.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const SideBar = (props) => {
+  const navigate = useNavigate();
   const { image, collapsed, toggled, handleToggleSidebar } = props;
   return (
     <>
@@ -45,7 +46,7 @@ const SideBar = (props) => {
             }}
           >
             <img className="img-logo" src={logo}></img>
-            TanNQ
+            <span onClick={() => navigate("/")}>TanNQ</span>
           </div>
         </SidebarHeader>
 
@@ -68,7 +69,13 @@ const SideBar = (props) => {
                   className="nav-link"
                 ></NavLink>
               </MenuItem>
-              <MenuItem> Quản Lý Bài Quiz</MenuItem>
+              <MenuItem>
+                Quản Lý Bài Quiz
+                <NavLink
+                  to="/admins/manage-quiz"
+                  className="nav-link"
+                ></NavLink>
+              </MenuItem>
               <MenuItem> Quản Lý Câu Hỏi</MenuItem>
             </SubMenu>
           </Menu>
