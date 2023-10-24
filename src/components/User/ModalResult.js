@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 
 function ModalResult(props) {
   const { show, setShow, dataModalResult } = props;
-  console.log("check data modal", dataModalResult);
   const handleClose = () => setShow(false);
   return (
     <>
