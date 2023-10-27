@@ -1,7 +1,11 @@
 const TableQuiz = (props) => {
   const { listQuiz } = props;
-  const handleClickBtnUpdate = (item) => {};
-  const handleClickBtnDel = (item) => {};
+  const handleClickBtnUpdate = (item) => {
+    props.handleIUpdateQuiz(item);
+  };
+  const handleClickBtnDel = (item) => {
+    props.handleDelteQuiz(item);
+  };
   return (
     <div className="mt-3">
       <table className="table">

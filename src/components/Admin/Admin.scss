@@ -30,6 +30,8 @@
         
     }
     .admin-content{
+        overflow: scroll;
+        height: 100vh;
         width: 100%;
         .admin-header {
             height: 40px;

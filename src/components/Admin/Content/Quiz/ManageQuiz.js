@@ -2,9 +2,14 @@ import { useState, useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import "./ManageQuiz.scss";
 import Select from "react-select";
-import { getAllQuizForAdmin, postCreateNewQuiz } from "../../../../service/apiServices";
+import {
+  getAllQuizForAdmin,
+  postCreateNewQuiz,
+} from "../../../../service/apiServices";
 import { toast } from "react-toastify";
 import TableQuiz from "./TableQuiz";
+import ModalDeleteQuiz from "./ModalDeleteQuiz";
+import ModalUpdateQuiz from "./ModalUpdateQuiz";
 const options = [
   { value: "EASY", label: "EASY" },
   { value: "MEDIUM", label: "MEDIUM" },
@@ -16,6 +21,11 @@ const ManageQuiz = (props) => {
   const [type, setType] = useState({ label: "EASY", value: "EASY" });
   const [image, setImage] = useState();
   const [listQuiz, setListQuiz] = useState([]);
+  const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false);
+  const [showModalUpdateQuiz, setShowModalUpdateQuiz] = useState(false);
+  const [dataDel, setDataDel] = useState([]);
+  const [updateData, setUpdateData] = useState([]);
+
   const handleChangeFile = (e) => {
     if (e.target && e.target.files && e.target.files["0"]) {
       setImage(e.target.files["0"]);
@@ -45,6 +55,22 @@ const ManageQuiz = (props) => {
       fetchAllQuiz();
     } else {
       toast.error(data.EM);
+    }
+  };
+  const handleDelteQuiz = (data) => {
+    if (data) {
+      setShowModalDeleteQuiz(true);
+      setDataDel(data);
+    } else {
+      toast.error("Not data user");
+    }
+  };
+  const handleIUpdateQuiz = (data) => {
+    if (data) {
+      setShowModalUpdateQuiz(true);
+      setUpdateData(data);
+    } else {
+      toast.error("Not data user");
     }
   };
   return (
@@ -80,7 +106,7 @@ const ManageQuiz = (props) => {
                 </div>
                 <div className="my-3">
                   <Select
-                    defaultValue={type}
+                    defaultValue={type.value}
                     onChange={setType}
                     options={options}
                     placeholder={"Quiz type"}
@@ -108,8 +134,24 @@ const ManageQuiz = (props) => {
         </Accordion.Item>
       </Accordion>
       <div className="list-datail">
-        <TableQuiz listQuiz={listQuiz} />
+        <TableQuiz
+          listQuiz={listQuiz}
+          handleDelteQuiz={handleDelteQuiz}
+          handleIUpdateQuiz={handleIUpdateQuiz}
+        />
       </div>
+      <ModalDeleteQuiz
+        show={showModalDeleteQuiz}
+        setShow={setShowModalDeleteQuiz}
+        dataDelete={dataDel}
+        fetchAllQuiz={fetchAllQuiz}
+      />
+      <ModalUpdateQuiz
+        show={showModalUpdateQuiz}
+        setShow={setShowModalUpdateQuiz}
+        dataUpdate={updateData}
+        fetchAllQuiz={fetchAllQuiz}
+      />
     </div>
   );
 };
