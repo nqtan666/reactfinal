@@ -5,7 +5,7 @@ import { deleteQuiz } from "../../../../service/apiServices";
 
 function ModalDeleteQuiz(props) {
   const { show, setShow, dataDelete } = props;
-  console.log("check huhu ", dataDelete);
+
   const handleClose = () => setShow(false);
   const handleSubmitDeleteQuiz = async () => {
     let data = await deleteQuiz(dataDelete.id);

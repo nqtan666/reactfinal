@@ -28,7 +28,6 @@ function ModalUpdateQuiz(props) {
 
   useEffect(() => {
     if (!_.isEmpty(dataUpdate)) {
-      console.log(dataUpdate);
       setName(dataUpdate.name);
       setDecription(dataUpdate.description);
       setType({ label: dataUpdate.difficulty, value: dataUpdate.difficulty });

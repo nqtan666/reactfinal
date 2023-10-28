@@ -43,11 +43,11 @@ const Questions = () => {
     }
   };
   const handleAddRemoveAnswer = (type, idQuestion, idAnswer) => {
-    console.log(type);
+
     let dataClone = _.cloneDeep(questions);
     let index = questions.findIndex((question) => question.id === idQuestion);
     if (type === "ADD") {
-      console.log(11111);
+
       let dataAnswer = {
         id: uuidv4(),
         description: "Ansewr 1",
@@ -55,7 +55,7 @@ const Questions = () => {
       };
       if (index > -1) {
         dataClone[index].answer.push(dataAnswer);
-        console.log(dataClone[index]);
+
         setQuestions(dataClone);
       }
     }
@@ -68,7 +68,7 @@ const Questions = () => {
       }
     }
   };
-  console.log("checkkk quesotuon", questions);
+
   return (
     <div className="question-container">
       <div className="title">Manage Questions</div>
