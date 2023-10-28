@@ -76,7 +76,14 @@ const SideBar = (props) => {
                   className="nav-link"
                 ></NavLink>
               </MenuItem>
-              <MenuItem> Quản Lý Câu Hỏi</MenuItem>
+              <MenuItem>
+                {" "}
+                Quản Lý Câu Hỏi
+                <NavLink
+                  to="/admins/manage-questions"
+                  className="nav-link"
+                ></NavLink>
+              </MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>

@@ -8,15 +8,27 @@ const TableQuiz = (props) => {
   };
   return (
     <div className="mt-3">
-      <table className="table">
+      <table className="table table-bordered border-primary">
         <thead className="thead-dark">
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Decription</th>
-            <th scope="col">Level</th>
-            <th scope="col">Image</th>
-            <th scope="col">Action</th>
+            <th className="text-center" scope="col">
+              ID
+            </th>
+            <th className="text-center" scope="col">
+              Name
+            </th>
+            <th className="text-center" scope="col">
+              Decription
+            </th>
+            <th className="text-center" scope="col">
+              Level
+            </th>
+            <th className="text-center" scope="col">
+              Image
+            </th>
+            <th className="text-center" scope="col">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
