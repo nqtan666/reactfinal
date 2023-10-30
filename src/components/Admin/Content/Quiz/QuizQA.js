@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { useState, useEffect } from "react";
-import "./Questions.scss";
+import "./QuizQA.scss";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import _ from "lodash";
 import { MdClear } from "react-icons/md";
@@ -18,7 +18,7 @@ import {
 //   { value: "MEDIUM", label: "MEDIUM" },
 //   { value: "HARD", label: "HARD" },
 // ];
-const Questions = () => {
+const QuizQA = () => {
   const initQuestions = {
     id: uuidv4(),
     description: "",
@@ -234,8 +234,6 @@ const Questions = () => {
   };
   return (
     <div className="question-container">
-      <div className="title">Manage Questions</div>
-      <hr />
       <div className="add-new-question">
         <div className="col-6 form-group">
           <label>Select Quiz:</label>
@@ -395,4 +393,4 @@ const Questions = () => {
     </div>
   );
 };
-export default Questions;
+export default QuizQA;

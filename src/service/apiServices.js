@@ -90,6 +90,12 @@ const postCreateNewAnswerForQuestion = (
     question_id,
   });
 };
+const assignQuizForUser = (quizId, userId) => {
+  return axiosCustomize.post("/api/v1/quiz-assign-to-user", {
+    quizId: quizId,
+    userId: userId,
+  });
+};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -107,4 +113,5 @@ export {
   updateQuiz,
   postCreateNewQuestionForQuiz,
   postCreateNewAnswerForQuestion,
+  assignQuizForUser,
 };

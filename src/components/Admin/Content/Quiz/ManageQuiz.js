@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import TableQuiz from "./TableQuiz";
 import ModalDeleteQuiz from "./ModalDeleteQuiz";
 import ModalUpdateQuiz from "./ModalUpdateQuiz";
+import QuizQA from "./QuizQA";
+import AssigQuiz from "./AssignQuiz";
 const options = [
   { value: "EASY", label: "EASY" },
   { value: "MEDIUM", label: "MEDIUM" },
@@ -128,18 +130,35 @@ const ManageQuiz = (props) => {
                     Save
                   </button>
                 </div>
+                <div className="list-datail">
+                  <TableQuiz
+                    listQuiz={listQuiz}
+                    handleDelteQuiz={handleDelteQuiz}
+                    handleIUpdateQuiz={handleIUpdateQuiz}
+                  />
+                </div>
               </fieldset>
             </div>
           </Accordion.Body>
         </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>
+            <div className="title">Update Q/A Quizz</div>
+          </Accordion.Header>
+          <Accordion.Body>
+            <QuizQA />
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="2">
+          <Accordion.Header>
+            <div className="title">Assign to User</div>
+          </Accordion.Header>
+          <Accordion.Body>
+            <AssigQuiz />
+          </Accordion.Body>
+        </Accordion.Item>
       </Accordion>
-      <div className="list-datail">
-        <TableQuiz
-          listQuiz={listQuiz}
-          handleDelteQuiz={handleDelteQuiz}
-          handleIUpdateQuiz={handleIUpdateQuiz}
-        />
-      </div>
+
       <ModalDeleteQuiz
         show={showModalDeleteQuiz}
         setShow={setShowModalDeleteQuiz}
