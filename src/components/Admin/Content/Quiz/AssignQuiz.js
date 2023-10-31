@@ -8,7 +8,7 @@ import {
   getAllUsers,
   assignQuizForUser,
 } from "../../../../service/apiServices";
-const AssigQuiz = () => {
+const AssigQuiz = (props) => {
   const [listQuiz, setListQuiz] = useState([]);
   const [selectQuiz, setSelectQuiz] = useState({});
 
@@ -17,7 +17,7 @@ const AssigQuiz = () => {
   useEffect(() => {
     fetchAllQuiz();
     fetchAllUser();
-  }, []);
+  }, [props.listQuiz]);
   const fetchAllUser = async () => {
     let data = await getAllUsers();
     if (data.EC === 0) {

@@ -55,8 +55,7 @@ const Questions = () => {
       let dataFilte = questions.filter(
         (question) => question.id !== idQuestion
       );
-      console.log(dataFilte);
-      console.log(typeof dataFilte);
+
       setQuestions(dataFilte);
     }
   };
@@ -222,7 +221,7 @@ const Questions = () => {
     toast.success("Created qyestion and answer successfully");
     setQuestions([initQuestions]);
   };
-  console.log("check question", questions);
+
   const handleImagePreview = (idQuestion) => {
     setIsPreviewImage(true);
     let dataClone = _.cloneDeep(questions);

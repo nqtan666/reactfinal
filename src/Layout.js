@@ -12,7 +12,7 @@ import ListQuiz from "./components/User/ListQuiz";
 import DetailQuiz from "./components/User/DetailQuiz";
 import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz";
 import Questions from "./components/Admin/Content/Question/Questions";
-
+import { useSelector } from "react-redux";
 const NotFound = () => {
   return (
     <div className="container mt-3 alert alert-danger">

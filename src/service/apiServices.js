@@ -96,6 +96,38 @@ const assignQuizForUser = (quizId, userId) => {
     userId: userId,
   });
 };
+const getQuizWithQA = (quizId) => {
+  return axiosCustomize.get(`/api/v1/quiz-with-qa/${quizId}`);
+};
+// const postUpdateNewQuestionForQuiz = (id, quiz_id, description, image) => {
+//   const data = new FormData();
+//   data.append("id", id);
+//   data.append("quiz_id", quiz_id);
+//   data.append("description", description);
+//   data.append("questionImage", image);
+//   return axiosCustomize.put("api/v1/question", data);
+// };
+// const postUpdateNewAnswerForQuestion = (
+//   description,
+//   correct_answer,
+//   question_id,
+//   answer_id
+// ) => {
+//   return axiosCustomize.put("api/v1/answer", {
+//     description,
+//     correct_answer,
+//     question_id,
+//     answer_id,
+//   });
+// };
+const postUpdateQA = (data) => {
+  return axiosCustomize.post("/api/v1/quiz-upsert-qa", { ...data });
+};
+const deleteQuestionOfQuiz = (id, quizId) => {
+  return axiosCustomize.delete("/api/v1/question", {
+    data: { id: id, quizId: quizId },
+  });
+};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -114,4 +146,7 @@ export {
   postCreateNewQuestionForQuiz,
   postCreateNewAnswerForQuestion,
   assignQuizForUser,
+  getQuizWithQA,
+  postUpdateQA,
+  deleteQuestionOfQuiz,
 };

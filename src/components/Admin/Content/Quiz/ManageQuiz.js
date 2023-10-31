@@ -146,7 +146,7 @@ const ManageQuiz = (props) => {
             <div className="title">Update Q/A Quizz</div>
           </Accordion.Header>
           <Accordion.Body>
-            <QuizQA />
+            <QuizQA listQuiz={listQuiz} />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="2">
@@ -154,7 +154,7 @@ const ManageQuiz = (props) => {
             <div className="title">Assign to User</div>
           </Accordion.Header>
           <Accordion.Body>
-            <AssigQuiz />
+            <AssigQuiz listQuiz={listQuiz} />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

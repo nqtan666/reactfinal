@@ -61,7 +61,7 @@ const SideBar = (props) => {
             </MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu title="Features" icon={<FaRegLaughWink />}>
+            <SubMenu title="Manage" icon={<FaRegLaughWink />}>
               <MenuItem>
                 Quản Lý User
                 <NavLink

@@ -12,19 +12,18 @@ import {
   getAllQuizForAdmin,
   postCreateNewQuestionForQuiz,
   postCreateNewAnswerForQuestion,
+  getQuizWithQA,
+  postUpdateQA,
+  deleteQuestionOfQuiz,
 } from "../../../../service/apiServices";
-// const options = [
-//   { value: "EASY", label: "EASY" },
-//   { value: "MEDIUM", label: "MEDIUM" },
-//   { value: "HARD", label: "HARD" },
-// ];
-const QuizQA = () => {
+
+const QuizQA = (props) => {
   const initQuestions = {
     id: uuidv4(),
     description: "",
     imageFile: "",
     imageName: "",
-    answer: [{ id: uuidv4(), description: "", isCorrect: false }],
+    answers: [{ id: uuidv4(), description: "", isCorrect: false }],
   };
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   const [imagePreview, setImagePreview] = useState("");
@@ -34,7 +33,7 @@ const QuizQA = () => {
   const [selectQuiz, setSelectQuiz] = useState({});
   useEffect(() => {
     fetchAllQuiz();
-  }, []);
+  }, [props.listQuiz]);
   const fetchAllQuiz = async () => {
     const res = await getAllQuizForAdmin();
     if (res.EC === 0) {
@@ -47,17 +46,66 @@ const QuizQA = () => {
       setListQuiz(newQuiz);
     }
   };
-  const hanldeAddRemoveQuestion = (type, idQuestion) => {
+  useEffect(() => {
+    if (selectQuiz && selectQuiz.value) {
+      fetchQuizWithQA();
+    }
+  }, [selectQuiz]);
+  // return a promise that resolves with a File instance
+  function urltoFile(url, filename, mimeType) {
+    if (url.startsWith("data:")) {
+      var arr = url.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[arr.length - 1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      var file = new File([u8arr], filename, { type: mime || mimeType });
+      return Promise.resolve(file);
+    }
+    return fetch(url)
+      .then((res) => res.arrayBuffer())
+      .then((buf) => new File([buf], filename, { type: mimeType }));
+  }
+
+  const fetchQuizWithQA = async () => {
+    let res = await getQuizWithQA(selectQuiz.value);
+    if (res.EC === 0) {
+      //convert base 64 to file
+      let newQA = [];
+      for (let i = 0; i < res.DT.qa.length; i++) {
+        let q = res.DT.qa[i];
+        if (q.imageFile) {
+          q.imageName = `Questions-${q.id}`;
+          res.DT.qa[i].imageFile = await urltoFile(
+            `data:image/png;base64,${q.imageFile}`,
+            `Questions-${q.id}`,
+            "image/png"
+          );
+        }
+        newQA.push(q);
+      }
+      setQuestions(newQA);
+    }
+  };
+  const hanldeAddRemoveQuestion = async (type, idQuestion) => {
     if (type === "ADD") {
       setQuestions([...questions, initQuestions]);
     }
     if (type == "REMOVE") {
-      let dataFilte = questions.filter(
-        (question) => question.id !== idQuestion
-      );
-      console.log(dataFilte);
-      console.log(typeof dataFilte);
-      setQuestions(dataFilte);
+      if (questions.length - 1 === 0) {
+        toast.error("Please not delete");
+      }
+      // call api
+      let res = await deleteQuestionOfQuiz(idQuestion, selectQuiz.value);
+      if (res && res.EC === 0) {
+        toast.success(res.EM);
+        fetchQuizWithQA();
+      } else {
+        toast.error(res.EM);
+      }
     }
   };
   const handleAddRemoveAnswer = (type, idQuestion, idAnswer) => {
@@ -70,14 +118,14 @@ const QuizQA = () => {
         isCorrect: false,
       };
       if (index > -1) {
-        dataClone[index].answer.push(dataAnswer);
+        dataClone[index].answers.push(dataAnswer);
 
         setQuestions(dataClone);
       }
     }
     if (type === "REMOVE") {
       if (index > -1) {
-        dataClone[index].answer = dataClone[index].answer.filter(
+        dataClone[index].answers = dataClone[index].answers.filter(
           (item) => item.id !== idAnswer
         );
         setQuestions(dataClone);
@@ -107,7 +155,7 @@ const QuizQA = () => {
     let dataClone = _.cloneDeep(questions);
     let index = questions.findIndex((question) => question.id === idQuestion);
     if (index > -1) {
-      dataClone[index].answer = dataClone[index].answer.map((answer) => {
+      dataClone[index].answers = dataClone[index].answers.map((answer) => {
         if (answer.id === idAnswer) {
           if (type === "CHECKBOX") {
             answer.isCorrect = value;
@@ -122,30 +170,6 @@ const QuizQA = () => {
     }
   };
   const handleSubmitQuestionForQuiz = async () => {
-    //validate => todo: validate
-
-    //submit question
-    //postCreateNewQuestionForQuiz,postCreateNewAnswerForQuestion
-    //submit question
-    // await Promise.all(
-    //   questions.map(async (question) => {
-    //     const q = await postCreateNewQuestionForQuiz(
-    //       +selectQuiz.value,
-    //       question.description,
-    //       question.imageFile
-    //     );
-    //     // submit answer
-    //     await Promise.all(
-    //       question.answer.map(async (answer) => {
-    //         await postCreateNewAnswerForQuestion(
-    //           answer.description,
-    //           answer.isCorrect,
-    //           q.DT.id
-    //         );
-    //       })
-    //     );
-    //   })
-    // );
     if (_.isEmpty(selectQuiz)) {
       toast.error("Please choose a Quiz!");
       return;
@@ -155,8 +179,8 @@ const QuizQA = () => {
     let indexQ = 0,
       indexA = 0;
     for (let i = 0; i < questions.length; i++) {
-      for (let j = 0; j < questions[i].answer.length; j++) {
-        if (!questions[i].answer[j].description) {
+      for (let j = 0; j < questions[i].answers.length; j++) {
+        if (!questions[i].answers[j].description) {
           indexA = j;
           isValidAnswer = false;
           break;
@@ -189,40 +213,46 @@ const QuizQA = () => {
     let isCorrect = true;
     for (let i = 0; i < questions.length; i++) {
       let tmp = 0;
-      for (let j = 0; j < questions[i].answer.length; j++) {
-        if (questions[i].answer[j].isCorrect) {
+      for (let j = 0; j < questions[i].answers.length; j++) {
+        if (questions[i].answers[j].isCorrect) {
           tmp++;
         }
-        if (tmp === 0) {
-          isCorrect = false;
-          indexQ = i;
-          break;
-        }
+      }
+      if (tmp === 0) {
+        isCorrect = false;
+        indexQ = i;
+        break;
       }
     }
     if (!isCorrect) {
       toast.error(`Not is correct at question ${+indexQ + 1}`);
       return;
     }
-    for (const question of questions) {
-      const q = await postCreateNewQuestionForQuiz(
-        +selectQuiz.value,
-        question.description,
-        question.imageFile
-      );
-      // submit answer
-      for (const answer of question.answer) {
-        await postCreateNewAnswerForQuestion(
-          answer.description,
-          answer.isCorrect,
-          q.DT.id
-        );
+    let questionClone = _.cloneDeep(questions);
+    for (let i = 0; i < questionClone.length; i++) {
+      if (questionClone[i].imageFile) {
+        questionClone[i].imageFile = await toBase64(questionClone[i].imageFile);
       }
     }
-    toast.success("Created qyestion and answer successfully");
-    setQuestions([initQuestions]);
+    let res = await postUpdateQA({
+      quizId: selectQuiz.value,
+      questions: questionClone,
+    });
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      fetchQuizWithQA();
+    } else {
+      toast.error(res.EM);
+    }
   };
-  console.log("check question", questions);
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
+
   const handleImagePreview = (idQuestion) => {
     setIsPreviewImage(true);
     let dataClone = _.cloneDeep(questions);
@@ -309,9 +339,9 @@ const QuizQA = () => {
                     )}
                   </div>
                 </div>
-                {question.answer &&
-                  question.answer.length > 0 &&
-                  question.answer.map((answer, key) => {
+                {question.answers &&
+                  question.answers.length > 0 &&
+                  question.answers.map((answer, key) => {
                     return (
                       <div key={answer.id} className="answers-content">
                         <input
@@ -331,6 +361,7 @@ const QuizQA = () => {
                           <input
                             type="text"
                             className="form-control"
+                            value={answer.description}
                             onChange={(e) =>
                               handleAnswerQuestion(
                                 "INPUT",
@@ -351,7 +382,7 @@ const QuizQA = () => {
                               }
                             />
                           </span>
-                          {question.answer.length > 1 && (
+                          {question.answers.length > 1 && (
                             <span>
                               <MdClear
                                 className="icon-remove"
