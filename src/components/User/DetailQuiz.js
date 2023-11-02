@@ -6,6 +6,7 @@ import _ from "lodash";
 import Question from "./Question";
 import { useState } from "react";
 import ModalResult from "./ModalResult";
+import RightContent from "./Content/RightContent";
 const DetailQuiz = () => {
   const params = useParams();
   const quizId = params.id;
@@ -25,19 +26,6 @@ const DetailQuiz = () => {
     }
   };
   const handleFinishQuiz = async () => {
-    //   {
-    //     "quizId": 1,
-    //     "answers": [
-    //         {
-    //             "questionId": 1,
-    //             "userAnswerId": [3]
-    //         },
-    //         {
-    //             "questionId": 2,
-    //             "userAnswerId": [6]
-    //         }
-    //     ]
-    // }
     let payload = { quizId: +quizId, answers: [] };
     let answers = [];
     if (dataQuiz && dataQuiz.length > 0) {
@@ -146,7 +134,9 @@ const DetailQuiz = () => {
           </button>
         </div>
       </div>
-      <div className="right-content">Count down</div>
+      <div className="right-content">
+        <RightContent handleFinishQuiz={handleFinishQuiz} dataQuiz={dataQuiz} />
+      </div>
       <ModalResult
         show={isShowModalResult}
         setShow={setShowModalResult}

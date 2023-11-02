@@ -10,8 +10,6 @@ import { toast } from "react-toastify";
 import Lightbox from "react-awesome-lightbox";
 import {
   getAllQuizForAdmin,
-  postCreateNewQuestionForQuiz,
-  postCreateNewAnswerForQuestion,
   getQuizWithQA,
   postUpdateQA,
   deleteQuestionOfQuiz,
