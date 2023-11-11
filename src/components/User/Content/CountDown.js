@@ -26,6 +26,10 @@ const CountDown = (props) => {
       .filter((v, i) => v !== "00" || i > 0)
       .join(":");
   };
-  return <div className="countdown-container">{toHHMMSS(count)}</div>;
+  return (
+    <div className="countdown-container">
+      {count === 0 ? "Time over" : toHHMMSS(count)}
+    </div>
+  );
 };
 export default CountDown;
