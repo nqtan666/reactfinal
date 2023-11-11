@@ -13,6 +13,7 @@ import DetailQuiz from "./components/User/DetailQuiz";
 import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz";
 import Questions from "./components/Admin/Content/Question/Questions";
 import { useSelector } from "react-redux";
+import PrivateRoutes from "./routes/PrivateRoutes";
 const NotFound = () => {
   return (
     <div className="container mt-3 alert alert-danger">
@@ -26,10 +27,25 @@ const Layout = (props) => {
       <Routes>
         <Route path="/" element={<App />} exact>
           <Route index element={<HomePage />} />
-          <Route path="/user" element={<ListQuiz />} />
+          <Route
+            path="/user"
+            element={
+              <PrivateRoutes>
+                <ListQuiz />
+              </PrivateRoutes>
+            }
+          />
         </Route>
         <Route path="/quiz/:id" element={<DetailQuiz />} />
-        <Route path="/admins" element={<Admin />}>
+
+        <Route
+          path="/admins"
+          element={
+            <PrivateRoutes>
+              <Admin />
+            </PrivateRoutes>
+          }
+        >
           <Route index element={<DashBoard />} />
           <Route path="manage-users" element={<ManageUser />} />
           <Route path="manage-quiz" element={<ManageQuiz />} />
@@ -38,6 +54,7 @@ const Layout = (props) => {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/test" element={<PrivateRoutes />} />
       </Routes>
       <ToastContainer />
     </>
