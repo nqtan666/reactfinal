@@ -128,6 +128,9 @@ const deleteQuestionOfQuiz = (id, quizId) => {
     data: { id: id, quizId: quizId },
   });
 };
+const logout = (email, refresh_token) => {
+  return axiosCustomize.post("/api/v1/logout", { email, refresh_token });
+};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -149,4 +152,5 @@ export {
   getQuizWithQA,
   postUpdateQA,
   deleteQuestionOfQuiz,
+  logout,
 };

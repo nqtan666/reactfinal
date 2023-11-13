@@ -1,4 +1,5 @@
 export const FETCH_USER_LOGIN_SUCCESS = "FETCH_USER_LOGIN_SUCCESS";
+export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 
 export const doLogin = (data) => {
   return {
@@ -6,3 +7,10 @@ export const doLogin = (data) => {
     payload : data
   };
 };
+export const doLogout = (data) => {
+  return {
+    type: USER_LOGIN_SUCCESS,
+    payload : data
+  };
+};
+

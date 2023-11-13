@@ -27,6 +27,11 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
   const handleGotoHome = () => {
     navigate("/");
   };
@@ -67,6 +72,7 @@ const Login = () => {
               className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(event) => handleKeyPress(event)}
             />
           </div>
           <span className="forgot-password">Forgot password?</span>
