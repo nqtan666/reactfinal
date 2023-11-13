@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import _ from "lodash";
 import { postRegister } from "../../service/apiServices";
+import Language from "../Header/Language";
 const Signup = () => {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -62,6 +63,7 @@ const Signup = () => {
           >
             Contact us
           </a>
+          <Language />
         </div>
         <div className="title col-4 mx-auto">Register Account</div>
         <div className="wellcome col-4 mx-auto">Hello, who’s this?</div>

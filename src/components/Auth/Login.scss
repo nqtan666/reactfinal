@@ -2,8 +2,11 @@
     
     .header{
         height: 45px;
-        text-align: right;
         padding: 12px;
+        display: flex;
+        gap: 10;
+        align-items: center;
+        justify-content: flex-end;
         .btn-signin{
             margin: 0px 5px;
             border-radius: 3px;
@@ -14,6 +17,7 @@
         .contact{
             color: black;
             font-size: 14px;
+            margin-right: 5px;
         }
     }
     .title{

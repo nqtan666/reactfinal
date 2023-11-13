@@ -7,7 +7,7 @@ import { logout } from "../../service/apiServices";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogout } from "../../redux/action/userAction";
-
+import Language from "./Language";
 const Header = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -49,9 +49,6 @@ const Header = () => {
             <NavLink to="/admins" className="nav-link">
               Admin
             </NavLink>
-            {/* <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="/user">Users</Nav.Link>
-            <Nav.Link href="/admin">Admin</Nav.Link> */}
           </Nav>
 
           <Nav>
@@ -75,6 +72,7 @@ const Header = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             )}
+            <Language />
           </Nav>
         </Navbar.Collapse>
       </Container>

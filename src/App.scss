@@ -84,3 +84,7 @@ video {
 
   width: 100vw;
 }
+.languages{
+
+  .dropdown-toggle:after { content: none }
+}

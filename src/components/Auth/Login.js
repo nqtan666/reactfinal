@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
 import { FaSpinner } from "react-icons/fa";
 import { set } from "lodash";
+import Language from "../Header/Language";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const Login = () => {
           >
             Contact us
           </a>
+          <Language />
         </div>
         <div className="title col-4 mx-auto">TanNQ Design</div>
         <div className="wellcome col-4 mx-auto">Hello, who’s this?</div>
