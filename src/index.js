@@ -10,6 +10,7 @@ import "react-awesome-lightbox/build/style.css";
 import "nprogress/nprogress.css";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
+import "./utils/i18n";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

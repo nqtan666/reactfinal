@@ -14,6 +14,7 @@ import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz";
 import Questions from "./components/Admin/Content/Question/Questions";
 import { useSelector } from "react-redux";
 import PrivateRoutes from "./routes/PrivateRoutes";
+import { Suspense } from "react";
 const NotFound = () => {
   return (
     <div className="container mt-3 alert alert-danger">
@@ -23,7 +24,7 @@ const NotFound = () => {
 };
 const Layout = (props) => {
   return (
-    <>
+    <Suspense fallback="...is loading">
       <Routes>
         <Route path="/" element={<App />} exact>
           <Route index element={<HomePage />} />
@@ -57,7 +58,7 @@ const Layout = (props) => {
         <Route path="/test" element={<PrivateRoutes />} />
       </Routes>
       <ToastContainer />
-    </>
+    </Suspense>
   );
 };
 

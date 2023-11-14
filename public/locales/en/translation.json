@@ -1,0 +1,11 @@
+ {
+    
+      "homepage": {
+        "title1": " There's a better way to ask",
+        "title2": " Get more data—like signups, feedback, and anything else—with forms designed to be refreshingly different.",
+        "title3": {
+          "notlogin": "Get started—it's free",
+          "login": "Doing Quiz Now"
+        }
+      }
+  }
