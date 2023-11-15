@@ -22,10 +22,10 @@ const getAllUsers = () => {
   return axiosCustomize.get("api/v1/participant/all");
 };
 const deleteUser = (userId) => {
-  return axiosCustomize.delete("/api/v1/participant", { data: { id: userId } });
+  return axiosCustomize.delete("api/v1/participant", { data: { id: userId } });
 };
 const getUserWithPaginate = (page, limit) => {
-  return axiosCustomize.get(`/api/v1/participant?page=${page}&limit=${limit}`);
+  return axiosCustomize.get(`api/v1/participant?page=${page}&limit=${limit}`);
 };
 
 const postLogin = (email, password) => {
@@ -59,7 +59,7 @@ const getAllQuizForAdmin = () => {
   return axiosCustomize.get("api/v1/quiz/all");
 };
 const deleteQuiz = (quizId) => {
-  return axiosCustomize.delete(`/api/v1/quiz/${quizId}`);
+  return axiosCustomize.delete(`api/v1/quiz/${quizId}`);
 };
 const updateQuiz = (id, decription, name, difficulty, image) => {
   const data = new FormData();
@@ -91,13 +91,13 @@ const postCreateNewAnswerForQuestion = (
   });
 };
 const assignQuizForUser = (quizId, userId) => {
-  return axiosCustomize.post("/api/v1/quiz-assign-to-user", {
+  return axiosCustomize.post("api/v1/quiz-assign-to-user", {
     quizId: quizId,
     userId: userId,
   });
 };
 const getQuizWithQA = (quizId) => {
-  return axiosCustomize.get(`/api/v1/quiz-with-qa/${quizId}`);
+  return axiosCustomize.get(`api/v1/quiz-with-qa/${quizId}`);
 };
 // const postUpdateNewQuestionForQuiz = (id, quiz_id, description, image) => {
 //   const data = new FormData();
@@ -121,15 +121,18 @@ const getQuizWithQA = (quizId) => {
 //   });
 // };
 const postUpdateQA = (data) => {
-  return axiosCustomize.post("/api/v1/quiz-upsert-qa", { ...data });
+  return axiosCustomize.post("api/v1/quiz-upsert-qa", { ...data });
 };
 const deleteQuestionOfQuiz = (id, quizId) => {
-  return axiosCustomize.delete("/api/v1/question", {
+  return axiosCustomize.delete("api/v1/question", {
     data: { id: id, quizId: quizId },
   });
 };
 const logout = (email, refresh_token) => {
-  return axiosCustomize.post("/api/v1/logout", { email, refresh_token });
+  return axiosCustomize.post("api/v1/logout", { email, refresh_token });
+};
+const getOverview = () => {
+  return axiosCustomize.get("api/v1/overview");
 };
 export {
   postCreateNewUser,
@@ -153,4 +156,5 @@ export {
   postUpdateQA,
   deleteQuestionOfQuiz,
   logout,
+  getOverview,
 };
