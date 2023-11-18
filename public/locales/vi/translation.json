@@ -14,5 +14,19 @@
         "text-prof": "Thông Tin",
         "text-logout": "Đăng Xuất",
         "text-setting": "Cài đặt"
+      },
+      "side-bar":{
+        "dashboard" : "Bảng điều khiển",
+        "manage" : "Quản lý ",
+        "manage-user" : "Quản lý Users",
+        "manage-quiz" : "Quản lý Quiz",
+        "manage-question" : "Quản lý câu hỏi"
+      },
+      "dashboard":{
+        "overview" : "Trang tổng quan Analytics",
+        "total-users" : "Tổng  Users ",
+        "total-quiz" : "Tổng Quiz",
+        "total-question" : "Tổng Questions",
+        "total-answers" : "Tổng Answers"
       }
   }

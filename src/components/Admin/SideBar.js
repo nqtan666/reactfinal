@@ -20,9 +20,11 @@ import {
 import sidebarBg from "../../assets/bg_sidebar.jpg";
 import logo from "../../assets/logo192.png";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useTranslation, Trans } from "react-i18next";
 const SideBar = (props) => {
   const navigate = useNavigate();
   const { image, collapsed, toggled, handleToggleSidebar } = props;
+  const { t, i18n } = useTranslation();
   return (
     <>
       <ProSidebar
@@ -56,29 +58,28 @@ const SideBar = (props) => {
               icon={<FaTachometerAlt />}
               // suffix={<span className="badge red">New</span>}
             >
-              Dashboard
+              {t("side-bar.dashboard")}
               <NavLink to="/admins" className="nav-link"></NavLink>
             </MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu title="Manage" icon={<FaRegLaughWink />}>
+            <SubMenu title={t("side-bar.manage")} icon={<FaRegLaughWink />}>
               <MenuItem>
-                Quản Lý User
+                {t("side-bar.manage-user")}
                 <NavLink
                   to="/admins/manage-users"
                   className="nav-link"
                 ></NavLink>
               </MenuItem>
               <MenuItem>
-                Quản Lý Bài Quiz
+                {t("side-bar.manage-quiz")}
                 <NavLink
                   to="/admins/manage-quiz"
                   className="nav-link"
                 ></NavLink>
               </MenuItem>
               <MenuItem>
-                {" "}
-                Quản Lý Câu Hỏi
+                {t("side-bar.manage-question")}
                 <NavLink
                   to="/admins/manage-questions"
                   className="nav-link"

@@ -15,5 +15,19 @@
         "text-prof": "Profile",
         "text-logout": "Logout",
         "text-setting" : "Setting"
+      },
+      "side-bar":{
+        "dashboard" : "DashBoard",
+        "manage" : "Mange ",
+        "manage-user" : "Manage Users",
+        "manage-quiz" : "Manage Quiz",
+        "manage-question" : "Manage Questions"
+      },
+      "dashboard":{
+        "overview" : "Analytics Dashboard",
+        "total-users" : "Total Users ",
+        "total-quiz" : "Total Quiz",
+        "total-question" : "Total Questions",
+        "total-answers" : "Total Answers"
       }
   }

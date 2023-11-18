@@ -12,13 +12,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { getOverview } from "../../../service/apiServices";
+import { useTranslation, Trans } from "react-i18next";
 const DashBoard = () => {
   const [dataOverView, setDataOverView] = useState([]);
   const [dataChart, setDataChart] = useState();
   useEffect(() => {
     fetchDataOverView();
   }, []);
-
+  const { t, i18n } = useTranslation();
   const fetchDataOverView = async () => {
     let res = await getOverview();
     if (res && res.EC === 0) {
@@ -50,12 +51,12 @@ const DashBoard = () => {
   console.log("check data chart ", dataChart);
   return (
     <div className="dashboard-container">
-      <div className="title">Analytics Dashboard</div>
+      <div className="title">{t("dashboard.overview")}</div>
       <hr />
       <div className="content">
         <div className="c-left">
           <div className="child">
-            <span className="text-1">Total Users</span>
+            <span className="text-1">{t("dashboard.total-users")}</span>
             <span className="text-2">
               {dataOverView && dataOverView.users && dataOverView.users.total
                 ? dataOverView.users.total
@@ -63,7 +64,7 @@ const DashBoard = () => {
             </span>
           </div>
           <div className="child">
-            <span className="text-1">Total Quiz</span>
+            <span className="text-1">{t("dashboard.total-quiz")}</span>
             <span className="text-2">
               {dataOverView &&
               dataOverView.others &&
@@ -73,7 +74,7 @@ const DashBoard = () => {
             </span>
           </div>
           <div className="child">
-            <span className="text-1">Total Questions</span>
+            <span className="text-1">{t("dashboard.total-question")}</span>
             <span className="text-2">
               {dataOverView &&
               dataOverView.others &&
@@ -83,7 +84,7 @@ const DashBoard = () => {
             </span>
           </div>
           <div className="child">
-            <span className="text-1">Total Answers</span>
+            <span className="text-1">{t("dashboard.total-answers ")}</span>
             <span className="text-2">
               {dataOverView &&
               dataOverView.others &&
