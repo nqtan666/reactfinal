@@ -8,7 +8,9 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogout } from "../../redux/action/userAction";
 import Language from "./Language";
+import { useTranslation, Trans } from "react-i18next";
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => {
@@ -41,13 +43,13 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink to="/" className="nav-link">
-              Home
+              {t("header.text-home")}
             </NavLink>
             <NavLink to="/user" className="nav-link">
-              Users
+              {t("header.text-users")}
             </NavLink>
             <NavLink to="/admins" className="nav-link">
-              Admin
+              {t("header.text-admin")}
             </NavLink>
           </Nav>
 
@@ -62,13 +64,18 @@ const Header = () => {
                 </button>
               </>
             ) : (
-              <NavDropdown title="Setting" id="basic-nav-dropdown">
-                <NavDropdown.Item to="#action/3.1">Profile</NavDropdown.Item>
+              <NavDropdown
+                title={t("header.text-setting")}
+                id="basic-nav-dropdown"
+              >
+                <NavDropdown.Item to="#action/3.1">
+                  {t("header.text-prof")}
+                </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => handleLogOut()}
                   to="#action/3.1"
                 >
-                  Logout
+                  {t("header.text-logout")}
                 </NavDropdown.Item>
               </NavDropdown>
             )}

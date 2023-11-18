@@ -6,5 +6,13 @@
           "notlogin": "Sử dụng miễn phí",
           "login": "Doing Quiz Now"
         }
+      },
+      "header": {
+        "text-home":"Trang chủ",
+        "text-users":"Người Dùng",
+        "text-admin":"Quản trị",
+        "text-prof": "Thông Tin",
+        "text-logout": "Đăng Xuất",
+        "text-setting": "Cài đặt"
       }
   }
