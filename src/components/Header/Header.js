@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { doLogout } from "../../redux/action/userAction";
 import Language from "./Language";
 import { useTranslation, Trans } from "react-i18next";
+import { useState } from "react";
+import Profile from "./Profile";
 const Header = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
@@ -16,6 +18,8 @@ const Header = () => {
   const account = useSelector((state) => {
     return state.user.account;
   });
+  //show modal profile | default not show = false
+  const [showModalProf, setShowModalProf] = useState(false);
   const navigate = useNavigate();
   const handleLogin = () => {
     navigate("/login");
@@ -68,7 +72,10 @@ const Header = () => {
                 title={t("header.text-setting")}
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item to="#action/3.1">
+                <NavDropdown.Item
+                  onClick={() => setShowModalProf(true)}
+                  to="#action/3.1"
+                >
                   {t("header.text-prof")}
                 </NavDropdown.Item>
                 <NavDropdown.Item
@@ -83,6 +90,7 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
       </Container>
+      <Profile show={showModalProf} setShow={setShowModalProf} />
     </Navbar>
   );
 };
