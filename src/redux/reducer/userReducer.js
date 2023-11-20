@@ -1,4 +1,5 @@
 import {
+  CHANGE_IMAGE,
   FETCH_USER_LOGIN_SUCCESS,
   USER_LOGIN_SUCCESS,
 } from "../action/userAction";
@@ -40,7 +41,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
         },
         isAuthenticated: false,
       };
-
+    case CHANGE_IMAGE:
+      return {
+        ...state,
+        account: {
+          ...state.account,
+          image: action?.payload
+        },
+      };
     default:
       return state;
   }

@@ -134,6 +134,19 @@ const logout = (email, refresh_token) => {
 const getOverview = () => {
   return axiosCustomize.get("api/v1/overview");
 };
+const updateInfoUser = (username, image) => {
+  const data = new FormData();
+  data.append("username", username);
+  data.append("userImage", image);
+
+  return axiosCustomize.post("api/v1/profile", data);
+};
+const changePass = (oldPass, newPass) => {
+  return axiosCustomize.post("api/v1/change-password", {
+    current_password: oldPass,
+    new_password: newPass,
+  });
+};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -157,4 +170,6 @@ export {
   deleteQuestionOfQuiz,
   logout,
   getOverview,
+  updateInfoUser,
+  changePass,
 };

@@ -25,10 +25,10 @@ function Profile(props) {
             className="mb-3"
           >
             <Tab eventKey="Profile" title="Profile">
-              <InfoUser />
+              <InfoUser setShow ={props.setShow} />
             </Tab>
             <Tab eventKey="Change PassWord" title="Change PassWord">
-              <ChangePass />
+              <ChangePass setShow ={props.setShow}  />
             </Tab>
             <Tab eventKey="History" title="History">
               <History />
