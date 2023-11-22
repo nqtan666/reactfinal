@@ -27,7 +27,7 @@ function Profile(props) {
             <Tab eventKey="Profile" title="Profile">
               <InfoUser setShow ={props.setShow} />
             </Tab>
-            <Tab eventKey="Change PassWord" title="Change PassWord">
+            <Tab eventKey="Change Password" title="Change Password">
               <ChangePass setShow ={props.setShow}  />
             </Tab>
             <Tab eventKey="History" title="History">

@@ -147,6 +147,9 @@ const changePass = (oldPass, newPass) => {
     new_password: newPass,
   });
 };
+const getHistory = () => {
+  return axiosCustomize.get("api/v1/history");
+};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -172,4 +175,5 @@ export {
   getOverview,
   updateInfoUser,
   changePass,
+  getHistory,
 };
