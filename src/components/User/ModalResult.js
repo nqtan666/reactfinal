@@ -3,8 +3,22 @@ import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 
 function ModalResult(props) {
-  const { show, setShow, dataModalResult } = props;
-  const handleClose = () => setShow(false);
+  const {
+    show,
+    setShow,
+    dataModalResult,
+    setIsDisableFinish,
+    setIsShowAnswers,
+  } = props;
+  const handleClose = () => {
+    setShow(false);
+    setIsDisableFinish(true);
+  };
+  const handleShowAnswers = () => {
+    setShow(false);
+    setIsDisableFinish(true);
+    setIsShowAnswers(true);
+  };
   return (
     <>
       <Modal show={show} onHide={handleClose} backdrop="static">
@@ -21,7 +35,7 @@ function ModalResult(props) {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={() => handleShowAnswers()}>
             Show Answers
           </Button>
           <Button variant="danger" onClick={() => handleClose()}>

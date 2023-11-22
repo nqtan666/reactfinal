@@ -1,8 +1,10 @@
 import _ from "lodash";
 import { useState, useEffect } from "react";
 import Lightbox from "react-awesome-lightbox";
+import { FiCheck } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 const Question = (props) => {
-  const { data, index } = props;
+  const { data, index, isShowAnswers } = props;
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   if (_.isEmpty(data)) {
     return;
@@ -10,7 +12,6 @@ const Question = (props) => {
   const hanldeCheckBox = (aId, qId) => {
     props.handleCheckBox(aId, qId);
   };
-
   return (
     <>
       {data.image ? (
@@ -52,6 +53,17 @@ const Question = (props) => {
                 >
                   {item.description}
                 </label>
+                {isShowAnswers === true && (
+                  <>
+                    {item.isSelected === true && item.isCorrect === true && (
+                      <FiCheck className="answer-true" />
+                    )}
+                    {item.isCorrect === false &&  <FiX className="answer-false" />}
+                    {item.isSelected === false && item.isCorrect === true && (
+                      <FiCheck className="answer-true" />
+                    )}
+                  </>
+                )}
               </div>
             </div>
           );
